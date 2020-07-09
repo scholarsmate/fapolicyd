@@ -78,6 +78,16 @@ AC_CHECK_LIB(lmdb, mdb_env_create, , [AC_MSG_ERROR([liblmdb not found])], -llmdb
 
 LD_SO_PATH
 
+# Check to see if fapolicyd-analyzer should be built
+withval=""
+AC_ARG_WITH(analyzer,
+AS_HELP_STRING([--with-analyzer],[Build fapolicyd-analyzer service and UI]),
+with_analyzer=$withval,with_analyzer=no)
+AM_CONDITIONAL([WITH_ANALYZER], [test "x$with_analyzer" = xyes])
+if test "x$with_analyzer" = xyes; then
+  AC_CONFIG_SUBDIRS([analyzer])
+fi
+
 AC_OUTPUT(Makefile src/Makefile init/Makefile doc/Makefile)
 
 echo .
@@ -86,8 +96,8 @@ echo "
   fapolicyd Version:      $VERSION
   Target:                 $target
   Installation prefix:    $prefix
-  Compiler:               $CC
-  Compiler flags:
+  C Compiler:             $CC
+  C Compiler flags:
 `echo $CFLAGS | fmt -w 50 | sed 's,^,                          ,'`
 "
  
