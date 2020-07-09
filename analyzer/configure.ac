@@ -3,7 +3,7 @@
 
 AC_PREREQ([2.69])
 AC_CONFIG_MACRO_DIR([m4])
-AC_INIT([fapolicyd-analyzer], [0.1], bugs@ctc.com)
+AC_INIT(fapolicyd-analyzer,0.0.1)
 AC_CONFIG_SRCDIR([src/cli/fapolicyd-analyzer.c])
 AC_CONFIG_HEADERS([config.h])
 
@@ -45,7 +45,7 @@ LT_INIT
 AM_PROG_CC_C_O
 
 # Checks for header files.
-AC_CHECK_HEADERS([fcntl.h inttypes.h memory.h stddef.h stdint.h stdlib.h string.h unistd.h])
+AC_CHECK_HEADERS([fcntl.h float.h inttypes.h limits.h memory.h stddef.h stdint.h stdlib.h string.h unistd.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_CHECK_HEADER_STDBOOL
@@ -61,7 +61,7 @@ AC_CHECK_TYPES([ptrdiff_t])
 # Checks for library functions.
 AC_FUNC_MALLOC
 AC_FUNC_REALLOC
-AC_CHECK_FUNCS([memmove memset strchr strdup])
+AC_CHECK_FUNCS([floor memmove memset strchr strdup strstr])
 
 AC_CONFIG_FILES([Makefile
                  src/test/Makefile
