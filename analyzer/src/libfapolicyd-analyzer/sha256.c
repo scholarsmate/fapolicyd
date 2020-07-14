@@ -71,7 +71,7 @@ static void _sha256_transform(sha256_ctx_t *ctx, const unsigned char *data) {
   ctx->state[7] += h;
 }
 
-static int to_hex(char *hash_buf, size_t hash_buf_len, const unsigned char *digest, size_t digest_len) {
+static int _to_hex(char *hash_buf, size_t hash_buf_len, const unsigned char *digest, size_t digest_len) {
   size_t i;
   if (hash_buf_len > (digest_len << 1)) {
     for (i = 0; i < digest_len; i++) {
@@ -178,7 +178,7 @@ int sha256_file(char *hash_buf, size_t hash_buf_len, const char *path) {
   }
   close(fd);
   sha256_final(ctx, digest);
-  rc = to_hex(hash_buf, hash_buf_len, digest, sizeof(digest));
+  rc = _to_hex(hash_buf, hash_buf_len, digest, sizeof(digest));
   sha256_destroy(ctx);
   return rc;
 }

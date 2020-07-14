@@ -63,6 +63,19 @@ AC_FUNC_MALLOC
 AC_FUNC_REALLOC
 AC_CHECK_FUNCS([floor memmove memset strchr strdup strstr])
 
+AX_BOOST_BASE([1.66])
+withval=""
+AC_ARG_WITH(rpm,
+AS_HELP_STRING([--with-rpm],[Use the rpm database as a trust source]),
+use_rpm=$withval,use_rpm=yes)
+
+if test x$use_rpm = xyes ; then
+    AC_CHECK_LIB(rpm, rpmtsInitIterator, , [AC_MSG_ERROR([librpm not found])], -lrpm)
+    AC_CHECK_LIB(rpmio, rpmFreeCrypto, , [AC_MSG_ERROR([librpmio not found])], -lrpmio)
+    AC_DEFINE(USE_RPM,1,[Define if you want to use the rpm database as trust source.])
+fi
+AM_CONDITIONAL(WITH_RPM, test x$use_rpm = xyes)
+
 AC_CONFIG_FILES([Makefile
                  src/test/Makefile
                  src/Makefile

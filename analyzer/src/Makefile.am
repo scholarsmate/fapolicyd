@@ -8,6 +8,10 @@ libfapolicyd_analyzer_la_SOURCES = \
 	libfapolicyd-analyzer/error_codes.h \
 	libfapolicyd-analyzer/match.c \
 	libfapolicyd-analyzer/match.h \
+	libfapolicyd-analyzer/rpmdb_read.c \
+	libfapolicyd-analyzer/rpmdb_read.h \
+	libfapolicyd-analyzer/rpmdb_table.cpp \
+	libfapolicyd-analyzer/rpmdb_table.hpp \
 	libfapolicyd-analyzer/sha256.c \
 	libfapolicyd-analyzer/sha256.h \
 	libfapolicyd-analyzer/system_trust.cpp \
