@@ -20,7 +20,7 @@ libfapolicyd_analyzer_la_SOURCES = \
 	libfapolicyd-analyzer/table.hpp
 
 # Ask autotools to install the generated Python file.
-python_PYTHON = $(srcdir)/analyzer/bindings/python/fapolicyanalyzer.py
+python_PYTHON = $(srcdir)/analyzer/src/bindings/python/fapolicyanalyzer.py
 
 # This is the Python module.
 pyexec_LTLIBRARIES = _fapolicyanalyzer.la
