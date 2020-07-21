@@ -279,7 +279,7 @@ static char *format_value(int item, unsigned int num, decision_t results,
 			if (asprintf(&out, "%s", obj ? obj->o : "?") < 0)
 				out = NULL;
 		} else {
-			if (asprintf(&out,"%u",obj ? (obj->o ? 1 : 0) : 9) < 0)
+		    if (asprintf(&out, "%u", obj ? (obj->val ? 1 : 0) : 9) < 0)
 				out = NULL;
 		}
 	} else {
@@ -399,7 +399,7 @@ void make_policy_decision(const struct fanotify_event_metadata *metadata,
 	else
 		decision = process_event(&e);
 
-	if ((decision & ~AUDIT) == DENY)
+	if ((decision & DENY) == DENY)
 		denied++;
 	else
 		allowed++;
