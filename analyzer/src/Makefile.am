@@ -38,11 +38,18 @@ _fapolicyanalyzer_la_SOURCES = \
 _fapolicyanalyzer_la_LDFLAGS = -module ${PYTHON_LDFLAGS}
 
 # Preprocessing flags to build the Python module.
-_fapolicyanalyzer_la_CPPFLAGS = -I$(srcdir)/analyzer ${PYTHON_CPPFLAGS}
+_fapolicyanalyzer_la_CPPFLAGS = ${PYTHON_CPPFLAGS}
 
 # The Python module needs to link to the libfapolicyd-analyzer library.
 _fapolicyanalyzer_la_LIBADD = libfapolicyd-analyzer.la
 
-#sbin_PROGRAMS = fapolicyd-analyzer
-#fapolicyd_analyzer_SOURCES = cli/fapolicyd-analyzer.c
-#fapolicyd_analyzer_LDADD = libfapolicyd-analyzer.la
+sbin_PROGRAMS = fapolicyd-analyzer-server fapolicyd-analyzer-client
+
+fapolicyd_analyzer_server_SOURCES = server/fapolicyd-analyzer-server.cpp
+fapolicyd_analyzer_server_LDADD = libfapolicyd-analyzer.la @DBUS_CXX_LIBS@
+fapolicyd_analyzer_server_CPPFLAGS = @DBUS_CXX_CFLAGS@
+
+fapolicyd_analyzer_client_SOURCES = server/fapolicyd-analyzer-client.cpp
+fapolicyd_analyzer_client_LDADD = libfapolicyd-analyzer.la @DBUS_CXX_LIBS@
+fapolicyd_analyzer_client_CPPFLAGS = @DBUS_CXX_CFLAGS@
+

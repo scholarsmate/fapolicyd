@@ -68,6 +68,7 @@ withval=""
 AC_ARG_WITH(rpm,
 AS_HELP_STRING([--with-rpm],[Use the rpm database as a trust source]),
 use_rpm=$withval,use_rpm=yes)
+AX_PKG_CHECK_MODULES([DBUS_CXX],[dbus-c++-1])
 
 if test x$use_rpm = xyes ; then
     AC_CHECK_LIB(rpm, rpmtsInitIterator, , [AC_MSG_ERROR([librpm not found])], -lrpm)

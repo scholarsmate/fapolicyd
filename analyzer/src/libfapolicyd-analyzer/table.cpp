@@ -25,14 +25,6 @@ int table_t::initialize(const vect_of_strings_t &column_names) {
   return RANGE_ERROR;
 }
 
-int table_t::get_column_count() const {
-  try {
-    return boost::numeric_cast<int>(pimpl_->columns.size());
-  } catch (std::exception &) {
-    return RANGE_ERROR;
-  }
-}
-
 int table_t::get_row_count() const {
   if (0 < get_column_count()) {
     try {
@@ -44,7 +36,17 @@ int table_t::get_row_count() const {
   return NOT_FOUND;
 }
 
+int table_t::get_column_count() const {
+  try {
+    return boost::numeric_cast<int>(pimpl_->columns.size());
+  } catch (std::exception &) {
+    return RANGE_ERROR;
+  }
+}
+
 std::string table_t::get_column_name(int col_num) const { return pimpl_->columns[col_num].first; }
+
+vect_of_strings_t table_t::get_column(int col_num) const { return pimpl_->columns[col_num].second; }
 
 int table_t::find_column_number(const std::string &column_name) const {
   for (columns_t::const_iterator iter(pimpl_->columns.cbegin()); iter != pimpl_->columns.cend(); ++iter) {
